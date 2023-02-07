@@ -99,12 +99,18 @@ function gameOver() {
     alert(`The winner is ${playerScore > computerScore ? "Player!" : playerScore < computerScore ? "Computer!" : "Tie!"}`);
     resetSelections();
     roundIteration = 0;
+    computerScore = 0;
+    playerScore = 0;
+    roundIteration = 0;
     playerChoice = null;
     computerChoice = null;
+    gameActionElement.textContent = "..."
+    updateUi();
 }
 
 function checkIfGameIsOver() {
     if (roundIteration === 5) {
+
         return true;
     } else {
         return false;
@@ -115,5 +121,5 @@ function updateUi() {
     roundNumberElement.textContent = roundIteration;
     computerScoreElement.textContent = computerScore;
     playerScoreElement.textContent = playerScore;
-
 }
+
