@@ -1,8 +1,33 @@
 
+
+
+// Player starts game
+// Player makes choice, then computer makes chice
+// compare choice
+// add winner score
+// reset player and computer choice 
+// wait for player to select another choice.
+
+
 const choice = ["rock", "paper", "scissors"];
 let playerScore = 0;
 let computerScore = 0;
 
+let playerChoice = "";
+let computerChoice = "";
+
+
+let playerButtons = document.querySelectorAll("button");
+
+playerButtons.forEach((el, index) =>{
+    el.addEventListener("click", (e)=>{
+        e.stopPropagation();
+        playerChoice = +index;
+        computerChoice = +getComputerChoice();
+        playRound();
+
+    })
+})
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -11,21 +36,6 @@ function getRandomInt(max) {
 function getComputerChoice() {
     let randomNumber = getRandomInt(3);
     return randomNumber;
-}
-
-function getPlayerChoice() {
-    let playerSelection = prompt("Rock, Paper or Scissors").toLowerCase();
-    let playerSelectionNumber;
-
-    for (let i = 0; i < playerSelection.length; i++) {
-        if (choice[i] === playerSelection) {
-            playerSelectionNumber = i;
-        }
-        else {
-            continue;
-        }
-    }
-    return playerSelectionNumber;
 }
 
 function compareChoices(playerSelection, computerSelection) {
@@ -49,7 +59,7 @@ function compareChoices(playerSelection, computerSelection) {
 function playRound() {
     // check incoming string
     // if containes Win or Lose, increment the playerscore and computerscore
-    let endGameMessage = compareChoices(getPlayerChoice(), getComputerChoice());
+    let endGameMessage = compareChoices(playerChoice, computerChoice);
 
     if (endGameMessage.includes("Win")) {
         console.log("Win");
@@ -64,21 +74,17 @@ function playRound() {
     if(endGameMessage.includes("Tie"))
     {
         console.log("Tie");
-        return;
     }
 
-
+    resetSelections();
 }
 
+function resetSelections(){
+    playerChoice = null;
+    computerChoice = null;
+}
 
 function game() {
-    playRound();
-    playRound();
-    playRound();
-    playRound();
-    playRound();
-
     alert(`The winner is ${playerScore > computerScore ? "Player!" : playerScore < computerScore ? "Computer!" : "Nobody!"}`);
 }
 
-game();
