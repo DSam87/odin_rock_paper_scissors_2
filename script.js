@@ -10,18 +10,23 @@ let computerChoice = "";
 
 let roundIteration = 0;
 
-
-
-
+let gameAction = document.querySelector(".game-action");
 
 let playerButtons = document.querySelectorAll("button");
 
 playerButtons.forEach((el, index) => {
     el.addEventListener("click", (e) => {
+
+        if(checkIfGameIsOver()){
+            // anounce to player
+            gameOver();
+            return;
+        }
+
         e.stopPropagation();
         playerChoice = +index;
         computerChoice = +getComputerChoice();
-            playRound();
+        playRound();
     })
 })
 
@@ -57,14 +62,9 @@ function playRound() {
     // if containes Win or Lose, increment the playerscore and computerscore
     let endGameMessage = compareChoices(playerChoice, computerChoice);
     
-    if(checkIfGameIsOver()){
-        // anounce to player
-        console.log("its 5th round");
-        return;
-    }
+
 
     ++roundIteration;
-
 
     if (endGameMessage.includes("Win")) {
         console.log("Win");
@@ -88,8 +88,12 @@ function resetSelections() {
     computerChoice = null;
 }
 
-function game() {
-    alert(`The winner is ${playerScore > computerScore ? "Player!" : playerScore < computerScore ? "Computer!" : "Nobody!"}`);
+function gameOver() {
+    alert(`The winner is ${playerScore > computerScore ? "Player!" : playerScore < computerScore ? "Computer!" : "Tie!"}`);
+    resetSelections();
+    roundIteration = 0;
+    playerChoice = null;
+    computerChoice = null;
 }
 
 function checkIfGameIsOver() {
