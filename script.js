@@ -13,7 +13,7 @@ let computerScoreElement = document.querySelector(".computer-score-span");
 let playerScoreElement = document.querySelector(".player-score-span");
 
 
-let playerButtons = document.querySelectorAll("button");
+let playerButtons = document.querySelectorAll(".player-choice button");
 
 playerButtons.forEach((el, index) => {
     el.addEventListener("click", (e) => {
