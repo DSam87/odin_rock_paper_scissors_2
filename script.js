@@ -69,8 +69,6 @@ function playRound() {
     // if containes Win or Lose, increment the playerscore and computerscore
     let endGameMessage = compareChoices(playerChoice, computerChoice);
 
-
-
     ++roundIteration;
 
     if (endGameMessage.includes("Win")) {
